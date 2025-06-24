@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Heart Belongs to You | Happy Birthday</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: #f8f9fa;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        /* Floating hearts background */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0.7;
+            animation: float 8s infinite ease-in-out;
+            color: #e94560;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.7; }
+            50% { transform: translateY(-100px) rotate(180deg) scale(1.2); opacity: 0.4; }
+            100% { transform: translateY(0) rotate(360deg) scale(1); opacity: 0.7; }
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background: rgba(233, 69, 96, 0.3);
+            color: #f8f9fa;
+            border: 1px solid #e94560;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .nav-btn:hover {
+            background: #e94560;
+            transform: scale(1.1);
+        }
+
+        /* Music Control */
+        .music-control {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            background: rgba(233, 69, 96, 0.3);
+            border: 1px solid #e94560;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            color: #f8f9fa;
+        }
+
+        .music-control:hover {
+            background: #e94560;
+            transform: scale(1.1);
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Hero Section */
+        #hero {
+            background: linear-gradient(rgba(10, 10, 30, 0.8), rgba(10, 10, 30, 0.9)), 
+                        url('https://images.unsplash.com/photo-1529254479751-fbacb4c7b3c8?q=80&w=2070') center/cover;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5.5rem;
+            color: #e94560;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(233, 69, 96, 0.7);
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); text-shadow: 0 0 20px rgba(233, 69, 96, 0.7); }
+            50% { transform: scale(1.05); text-shadow: 0 0 30px rgba(233, 69, 96, 0.9); }
+            100% { transform: scale(1); text-shadow: 0 0 20px rgba(233, 69, 96, 0.7); }
+        }
+
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            font-weight: 400;
+            color: #f8f9fa;
+        }
+
+        .heart-divider {
+            width: 100px;
+            height: 2px;
+            background: #e94560;
+            margin: 30px auto;
+            position: relative;
+        }
+
+        .heart-divider::after {
+            content: "❤";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1a1a2e;
+            padding: 0 15px;
+            color: #e94560;
+            font-size: 1.5rem;
+        }
+
+        .hero-text {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            font-weight: 300;
+        }
+
+        /* Love Letter Section */
+        #love-letter {
+            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.95));
+        }
+
+        .letter-container {
+            background: rgba(25, 25, 45, 0.6);
+            border: 1px solid rgba(233, 69, 96, 0.3);
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 800px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .letter-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .letter-date {
+            font-family: 'Playfair Display', serif;
+            color: #e94560;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .letter-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #e94560;
+        }
+
+        .letter-content {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .letter-signature {
+            text-align: right;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #e94560;
+        }
+
+        /* Memories Section */
+        #memories {
+            background: linear-gradient(rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.9));
+        }
+
+        .memories-container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .section-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #e94560;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            background: #e94560;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1.5px;
+        }
+
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 20px 40px;
+            box-sizing: border-box;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-content {
+            background: rgba(25, 25, 45, 0.7);
+            border: 1px solid rgba(233, 69, 96, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .timeline-date {
+            font-family: 'Playfair Display', serif;
+            color: #e94560;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .timeline-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        /* Why I Love You Section */
+        #reasons {
+            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.95));
+        }
+
+        .reasons-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .reason-card {
+            background: rgba(25, 25, 45, 0.7);
+            border: 1px solid rgba(233, 69, 96, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.5s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .reason-card:hover {
+            transform: translateY(-10px);
+            border-color: #e94560;
+            box-shadow: 0 15px 30px rgba(233, 69, 96, 0.4);
+        }
+
+        .reason-icon {
+            font-size: 3rem;
+            color: #e94560;
+            margin-bottom: 20px;
+        }
+
+        .reason-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Future Section */
+        #future {
+            background: linear-gradient(rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.9));
+        }
+
+        .future-container {
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .promise-ring {
+            width: 200px;
+            height: 200px;
+            border: 3px solid #e94560;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 40px;
+            position: relative;
+            animation: pulse 3s infinite;
+        }
+
+        .promise-ring::after {
+            content: "❤";
+            position: absolute;
+            font-size: 3rem;
+            color: #e94560;
+            animation: rotate 10s infinite linear;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .future-text {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            background: rgba(10, 10, 30, 0.95);
+            border-top: 1px solid rgba(233, 69, 96, 0.3);
+        }
+
+        .footer-heart {
+            color: #e94560;
+            font-size: 2rem;
+            margin: 20px 0;
+            animation: pulse 1.5s infinite;
+        }
+        
+        /* Autoplay Message */
+        .autoplay-message {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(25, 25, 45, 0.9);
+            border: 1px solid rgba(233, 69, 96, 0.5);
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            max-width: 300px;
+            z-index: 100;
+            animation: fadeInOut 10s forwards;
+            display: none;
+            text-align: center;
+        }
+        
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translate(-50%, 10px); }
+            10% { opacity: 1; transform: translate(-50%, 0); }
+            90% { opacity: 1; transform: translate(-50%, 0); }
+            100% { opacity: 0; transform: translate(-50%, 10px); }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            h1 { font-size: 3.5rem; }
+            .subtitle { font-size: 1.8rem; }
+            .hero-text { font-size: 1.1rem; }
+            .letter-content { font-size: 1.1rem; }
+            .section-title { font-size: 2.8rem; }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .music-control {
+                top: 70px;
+                left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating hearts background -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+    
+    <!-- Music control -->
+    <div class="music-control" id="musicControl">
+        <i class="fas fa-music"></i>
+    </div>
+    
+    <!-- Autoplay message -->
+    <div class="autoplay-message" id="autoplayMessage">
+        Music couldn't start automatically. Click the music note to play.
+    </div>
+    
+    <!-- Navigation -->
+    <div class="nav-container">
+        <button class="nav-btn" onclick="scrollToSection('hero')"><i class="fas fa-home"></i></button>
+        <button class="nav-btn" onclick="scrollToSection('love-letter')"><i class="fas fa-heart"></i></button>
+        <button class="nav-btn" onclick="scrollToSection('memories')"><i class="fas fa-memory"></i></button>
+        <button class="nav-btn" onclick="scrollToSection('reasons')"><i class="fas fa-star"></i></button>
+        <button class="nav-btn" onclick="scrollToSection('future')"><i class="fas fa-ring"></i></button>
+    </div>
+    
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="hero-content">
+            <h1>Happy Birthday, My Love</h1>
+            <div class="heart-divider"></div>
+            <div class="subtitle">Every day with you is a gift, but today is especially precious</div>
+            <p class="hero-text">On this special day, I want you to know that you're the most beautiful thing that's ever happened to me. This is a celebration of you, of us, and of the love that grows stronger with each passing day.</p>
+            <button class="nav-btn" style="width: auto; padding: 15px 30px; font-size: 1.2rem;" onclick="scrollToSection('love-letter')">
+                <i class="fas fa-envelope"></i> Read My Love Letter
+            </button>
+        </div>
+    </section>
+    
+    <!-- Love Letter Section -->
+    <section id="love-letter">
+        <div class="letter-container">
+            <div class="letter-header">
+                <div class="letter-date">June 25, 2025</div>
+                <h2 class="letter-title">To My Forever Love</h2>
+            </div>
+            <div class="letter-content">
+                <p>My dearest,</p>
+                
+                <p>As I sit down to write this letter on your birthday, my heart overflows with emotions that words can barely capture. From the moment I first saw you, I knew my life would never be the same. Your smile, your laugh, the way your eyes light up when you're happy - these are the treasures I carry in my heart every day.</p>
+                
+                <p>I remember the first day i saw you  like it was yesterday. The nervous excitement, the way time seemed to stand still when we talked. That night, I knew I had found something extraordinary. You weren't just beautiful - you were real, genuine, and so full of life that you made everything around you shine brighter.</p>
+                
+                <p>Through the challenges of distance, you've shown me what true love really means. Your patience, your understanding, and your unwavering faith in us have been my anchor. Every video call, every message, every shared moment across the miles has only deepened my love for you.</p>
+                
+                <p>What I love most about you is how you see the world. Your kindness, your compassion for others, and your beautiful spirit inspire me to be a better man. The way you care for people, the dreams you hold in your heart, and the strength you show even when things are tough - these are the qualities that make you so incredibly special.</p>
+                
+                <p>Today, on your birthday, I want to make you a promise. I promise to cherish you every single day. To support your dreams as if they were my own. To listen when you need to be heard. To hold you when you need comfort. To celebrate your joys and stand by you in challenges. To grow with you, learn with you, and build a beautiful life with you.</p>
+                
+                <p>I dream of the day when distance is just a memory. When I can wake up beside you, make you coffee just the way you like it, and spend our days building a life together. I imagine our future home, our adventures,  With you, every dream feels possible.</p>
+                
+                <p>Happy birthday, my love. Thank you for being you - perfectly, wonderfully, beautifully you. I fall for you again every single day, and I will keep choosing you, loving you, and cherishing you for all the days of my life.</p>
+                
+                <p>With all my love, forever,</p>
+            </div>
+            <div class="letter-signature">Your Soulmate</div>
+        </div>
+    </section>
+    
+    <!-- Memories Section -->
+    <section id="memories">
+        <h2 class="section-title">Our Journey</h2>
+        <div class="memories-container">
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">14 April 2024</div>
+                        <h3 class="timeline-title">When i 1st saw you </h3>
+                        <p>its not just a date, but the day a photo stopped my world for a moment. Since then, your face has lived in a quiet corner of my heart.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">10Sept 2024</div>
+                        <h3 class="timeline-title">She left without a goodbye </h3>
+                        <p>She vanished like a shadow at dusk. And only in her silence did I realize—I wasn't just possessive… I was in love. A kind of love I never knew before, because I had never truly felt it before."</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">31 March, 2025</div>
+                        <h3 class="timeline-title">First Video call </h3>
+                        <p>Our first video call, that your voice and smile turned that memory into something real. Since then, you've been more than just a thought—you've been my favorite feeling.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Today</div>
+                        <h3 class="timeline-title">Your Special Day</h3>
+                        <p>Celebrating you and the incredible woman you've become. My love for you grows deeper with each passing day.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Reasons I Love You Section -->
+    <section id="reasons">
+        <h2 class="section-title">Why I Love You</h2>
+        <div class="reasons-container">
+            <div class="reason-card">
+                <div class="reason-icon"><i class="fas fa-smile"></i></div>
+                <h3 class="reason-title">Your Beautiful Smile</h3>
+                <p>It lights up my world even on the darkest days. Your smile is my favorite sight in the world.</p>
+            </div>
+            <div class="reason-card">
+                <div class="reason-icon"><i class="fas fa-heart"></i></div>
+                <h3 class="reason-title">Your Kind Heart</h3>
+                <p>The way you care for others inspires me every day. Your compassion knows no bounds.</p>
+            </div>
+            <div class="reason-card">
+                <div class="reason-icon"><i class="fas fa-brain"></i></div>
+                <h3 class="reason-title">Your Brilliant Mind</h3>
+                <p>Conversations with you are my favorite pastime. I love how you see the world.</p>
+            </div>
+            <div class="reason-card">
+                <div class="reason-icon"><i class="fas fa-moon"></i></div>
+                <h3 class="reason-title">Your Inner Strength</h3>
+                <p>Through every challenge, you've shown such resilience. Your strength amazes me.</p>
+            </div>
+            <div class="reason-card">
+                <div class="reason-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                <h3 class="reason-title">The Way You Love</h3>
+                <p>You've shown me what true love really means. Your love has transformed my life.</p>
+            </div>
+            <div class="reason-card">
+                <div class="reason-icon"><i class="fas fa-star"></i></div>
+                <h3 class="reason-title">Your Beautiful Soul</h3>
+                <p>You're the most genuine person I know. Your authenticity is rare and precious.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Future Section -->
+    <section id="future">
+        <h2 class="section-title">Our Future Together</h2>
+        <div class="future-container">
+            <div class="promise-ring"></div>
+            <p class="future-text">I promise to love you more with each passing day. To build a life with you full of laughter, adventure, and endless love. To stand by your side through every challenge and celebrate every joy.</p>
+            <p class="future-text">I dream of the home we'll build together, the places we'll explore, and the life we'll create. With you, every dream feels possible, and every day is a gift.</p>
+            <p class="future-text">Happy birthday, my love. Here's to forever with you.</p>
+            <button class="nav-btn" style="width: auto; padding: 15px 30px; font-size: 1.2rem; margin-top: 30px;" onclick="scrollToSection('hero')">
+                <i class="fas fa-redo"></i> Relive Our Love Story
+            </button>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <p>Created with endless love for the most amazing woman in the world</p>
+        <div class="footer-heart"><i class="fas fa-heart"></i></div>
+        <p>Forever yours,</p>
+        <p style="font-family: 'Dancing Script', cursive; font-size: 2rem; margin-top: 10px; color: #e94560;">[Apka batamiz❤️]</p>
+    </footer>
+
+    <!-- Audio element for background music -->
+    <!-- 
+        HOW TO ADD YOUR OWN SONG:
+        1. Replace the URL below with your custom song file
+        2. Make sure it's an MP3 file
+        3. Place the file in the same folder or provide a direct link
+    -->
+    <audio id="backgroundMusic" loop>
+        <!-- Replace this with your custom song file -->
+        <source src="audio (2).mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // Create floating hearts
+        const floatingHearts = document.getElementById('floatingHearts');
+        for (let i = 0; i < 50; i++) {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            heart.innerHTML = '❤';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = Math.random() * 100 + 'vh';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            floatingHearts.appendChild(heart);
+        }
+
+        // Function to scroll to sections
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Add subtle animations to elements when they come into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = "0";
+            section.style.transform = "translateY(20px)";
+            section.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+            observer.observe(section);
+        });
+
+        // Add special effect to the promise ring
+        const ring = document.querySelector('.promise-ring');
+        ring.addEventListener('click', function() {
+            for (let i = 0; i < 30; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('floating-heart');
+                heart.innerHTML = '❤';
+                heart.style.position = 'fixed';
+                heart.style.left = (ring.getBoundingClientRect().left + 100) + 'px';
+                heart.style.top = (ring.getBoundingClientRect().top + 100) + 'px';
+                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                heart.style.zIndex = '1000';
+                document.body.appendChild(heart);
+                
+                setTimeout(() => {
+                    document.body.removeChild(heart);
+                }, 3000);
+            }
+        });
+        
+        // Music player functionality
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        const musicControl = document.getElementById('musicControl');
+        const autoplayMessage = document.getElementById('autoplayMessage');
+        let musicPlaying = false;
+        
+        // Set volume to 30% by default
+        backgroundMusic.volume = 0.3;
+        
+        // Try to play music automatically
+        function tryAutoplay() {
+            const playPromise = backgroundMusic.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    // Autoplay worked
+                    musicPlaying = true;
+                    musicControl.innerHTML = '<i class="fas fa-pause"></i>';
+                }).catch(error => {
+                    // Autoplay was prevented
+                    console.log('Autoplay prevented:', error);
+                    autoplayMessage.style.display = 'block';
+                    setTimeout(() => {
+                        autoplayMessage.style.display = 'none';
+                    }, 10000);
+                });
+            }
+        }
+        
+        // Toggle music play/pause
+        function toggleMusic() {
+            if (musicPlaying) {
+                backgroundMusic.pause();
+                musicControl.innerHTML = '<i class="fas fa-music"></i>';
+            } else {
+                backgroundMusic.play().then(() => {
+                    musicPlaying = true;
+                    musicControl.innerHTML = '<i class="fas fa-pause"></i>';
+                }).catch(error => {
+                    console.log('Play failed:', error);
+                });
+            }
+            musicPlaying = !musicPlaying;
+        }
+        
+        // Add event listeners
+        musicControl.addEventListener('click', toggleMusic);
+        
+        // Try to autoplay when page loads
+        document.addEventListener('DOMContentLoaded', tryAutoplay);
+        
+        // Also try autoplay when the user interacts with the page
+        document.addEventListener('click', function() {
+            if (!musicPlaying) {
+                tryAutoplay();
+            }
+        });
+    </script>
+</body>
+</html>
